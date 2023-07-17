@@ -40,7 +40,6 @@ def build_diffusion_pipelines(
         torch_dtype=torch.float16,
         use_safetensors=True,
     ).to("cuda")
-    pipeimg.enable_attention_slicing()
     pipeimg.enable_xformers_memory_efficient_attention()
     pipeimg.safety_checker = None
 
