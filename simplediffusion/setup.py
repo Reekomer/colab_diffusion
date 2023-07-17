@@ -9,7 +9,7 @@ with open(requirements_path) as f:
     requirements = f.read().splitlines()
 
 setuptools.setup(
-    name="colabdiffusion",
+    name="simplediffusion",
     version="0.0.1",
     install_requires=requirements,
     packages=setuptools.find_packages("src"),
