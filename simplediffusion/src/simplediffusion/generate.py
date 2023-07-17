@@ -5,7 +5,7 @@ from typing import List
 from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion_img2img import (
     preprocess,
 )
-from colab_diffusion.prompt import PromptAttributes
+from simplediffusion.prompt import PromptAttributes
 import uuid
 from tinydb import TinyDB
 from diffusers import StableDiffusionImg2ImgPipeline
