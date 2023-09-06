@@ -96,15 +96,15 @@ def build_sdxl_diffusion_pipelines(
     pipeimg.enable_xformers_memory_efficient_attention()
     pipeimg.safety_checker = None
 
-    pipeinpainting = StableDiffusionXLInpaintPipeline.from_pretrained(
-        inpainting_model_path,
-        torch_dtype=torch.float16,
-        use_safetensors=True,
-    ).to("cuda")
-    pipeinpainting.enable_attention_slicing()
-    pipeinpainting.enable_xformers_memory_efficient_attention()
-    pipeinpainting.safety_checker = None
-    return pipe, pipeimg, pipeinpainting
+    # pipeinpainting = StableDiffusionXLInpaintPipeline.from_pretrained(
+    #     inpainting_model_path,
+    #     torch_dtype=torch.float16,
+    #     use_safetensors=True,
+    # ).to("cuda")
+    # pipeinpainting.enable_attention_slicing()
+    # pipeinpainting.enable_xformers_memory_efficient_attention()
+    # pipeinpainting.safety_checker = None
+    return pipe, pipeimg
 
 
 @lru_cache(maxsize=None)
