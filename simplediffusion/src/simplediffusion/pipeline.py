@@ -9,6 +9,9 @@ from diffusers import (
     StableDiffusionControlNetPipeline,
     ControlNetModel,
     UniPCMultistepScheduler,
+    StableDiffusionXLPipeline,
+    StableDiffusionXLImg2ImgPipeline,
+    StableDiffusionXLInpaintPipeline,
 )
 from functools import lru_cache
 
@@ -75,7 +78,7 @@ def build_sdxl_diffusion_pipelines(
     """
     Build a diffusion pipeline with a diffusion model as the base model.
     """
-    pipe = StableDiffusionPipeline.from_pretrained(
+    pipe = StableDiffusionXLPipeline.from_pretrained(
         model_path,
         revision="fp16",
         torch_dtype=torch.float16,
@@ -85,7 +88,7 @@ def build_sdxl_diffusion_pipelines(
     pipe.enable_xformers_memory_efficient_attention()
     pipe.safety_checker = None
 
-    pipeimg = StableDiffusionImg2ImgPipeline.from_pretrained(
+    pipeimg = StableDiffusionXLImg2ImgPipeline.from_pretrained(
         model_path,
         torch_dtype=torch.float16,
         use_safetensors=True,
@@ -93,7 +96,7 @@ def build_sdxl_diffusion_pipelines(
     pipeimg.enable_xformers_memory_efficient_attention()
     pipeimg.safety_checker = None
 
-    pipeinpainting = StableDiffusionInpaintPipeline.from_pretrained(
+    pipeinpainting = StableDiffusionXLInpaintPipeline.from_pretrained(
         inpainting_model_path,
         torch_dtype=torch.float16,
         use_safetensors=True,

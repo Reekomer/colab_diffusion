@@ -1,6 +1,6 @@
 accelerate==0.20.3
 controlnet-aux==0.0.6
-diffusers==0.18.2
+diffusers==0.20.2
 ftfy==6.1.1
 ipywidgets==7.7.1
 gradio==3.35.2
