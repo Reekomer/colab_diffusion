@@ -12,6 +12,7 @@ from diffusers import (
     StableDiffusionXLPipeline,
     StableDiffusionXLImg2ImgPipeline,
     StableDiffusionXLInpaintPipeline,
+    StableDiffusionXLControlNetPipeline,
 )
 from functools import lru_cache
 
@@ -121,5 +122,22 @@ def build_control_net_pipelines(
         full_diffusion_model_path, controlnet=controlnet, torch_dtype=torch.float16
     )
     pipe.scheduler = UniPCMultistepScheduler.from_config(pipe.scheduler.config)
+    pipe.enable_model_cpu_offload()
+    return pipe
+
+
+@lru_cache(maxsize=None)
+def build_control_net_sdxl_pipelines(
+    full_control_net_model_path: Path, full_diffusion_model_path: Path
+) -> StableDiffusionControlNetPipeline:
+    """
+    Build a control net pipeline with a diffusion model as the base model.
+    """
+    controlnet = ControlNetModel.from_pretrained(
+        full_control_net_model_path, torch_dtype=torch.float16
+    )
+    pipe = StableDiffusionXLControlNetPipeline.from_pretrained(
+        full_diffusion_model_path, controlnet=controlnet, torch_dtype=torch.float16
+    )
     pipe.enable_model_cpu_offload()
     return pipe
