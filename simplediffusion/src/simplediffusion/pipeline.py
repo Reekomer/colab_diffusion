@@ -109,6 +109,25 @@ def build_sdxl_diffusion_pipelines(
 
 
 @lru_cache(maxsize=None)
+def build_sdxl_inpainting_pipelines(
+    model_path: Path,
+    inpainting_model_path: Path,
+) -> tuple:
+    """
+    Build a diffusion pipeline with a diffusion model as the base model.
+    """
+    pipeinpainting = StableDiffusionXLInpaintPipeline.from_pretrained(
+        inpainting_model_path,
+        torch_dtype=torch.float16,
+        use_safetensors=True,
+    ).to("cuda")
+    pipeinpainting.enable_attention_slicing()
+    pipeinpainting.enable_xformers_memory_efficient_attention()
+    pipeinpainting.safety_checker = None
+    return pipeinpainting
+
+
+@lru_cache(maxsize=None)
 def build_control_net_pipelines(
     full_control_net_model_path: Path, full_diffusion_model_path: Path
 ) -> StableDiffusionControlNetPipeline:
