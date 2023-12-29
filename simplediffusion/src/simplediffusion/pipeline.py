@@ -105,7 +105,7 @@ def build_sdxl_diffusion_pipelines(
     pipeinpainting.enable_attention_slicing()
     pipeinpainting.enable_xformers_memory_efficient_attention()
     pipeinpainting.safety_checker = None
-    return pipe, pipeimg
+    return pipe, pipeimg, pipeinpainting
 
 
 @lru_cache(maxsize=None)
