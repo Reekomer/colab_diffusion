@@ -110,7 +110,6 @@ def build_sdxl_diffusion_pipelines(
 
 @lru_cache(maxsize=None)
 def build_sdxl_inpainting_pipelines(
-    model_path: Path,
     inpainting_model_path: Path,
 ) -> tuple:
     """
